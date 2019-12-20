@@ -17,5 +17,5 @@ CONFIG_PACKAGE_luci-app-smartdns=y
 CONFIG_PACKAGE_luci-app-udpxy
 CONFIG_PACKAGE_igmpproxy=y
 CONFIG_PACKAGE_omcproxy=y
-CONFIG_DEFAULT_luci-app-vlmcsd=y
+CONFIG_PACKAGE_luci-app-vlmcsd=y
 CONFIG_PACKAGE_luci-app-upnp=y
