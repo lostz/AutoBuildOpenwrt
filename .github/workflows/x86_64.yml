@@ -39,10 +39,7 @@ jobs:
         df -h
 
     - name: Clone source code
-      env: 
-        REPO_URL: https://github.com/coolsnowwolf/lede
-        REPO_BRANCH: master
-      run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+      run: git clone https://github.com/coolsnowwolf/lede   openwrt
 
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -51,10 +48,8 @@ jobs:
         ./scripts/feeds install -a
 
     - name: Configuration Customization - Build_x86_64
-      env:
-        CONFIG_FILE: 'x86_64_target'
       run: |
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+        mv x86_64_target openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
     - name: Download package
