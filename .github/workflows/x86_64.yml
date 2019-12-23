@@ -58,19 +58,17 @@ jobs:
         ./$DIY_SH
         cd openwrt
         make defconfig
+    - name: Download package
+      working-directory: ./openwrt
+      run: |
+         make download -j8
+        find dl -size -1024c -exec ls -l {} \;
+        find dl -size -1024c -exec rm -f {} \;
     - name: Build firmware
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
-        make -j1 V=s
-        echo "======================="
-        echo "Space usage:"
-        echo "======================="
-        df -h
-        echo "======================="
-        du -h --max-depth=1 openwrt/ --exclude=build_dir --exclude=bin
-        du -h --max-depth=1 openwrt/build_dir
-        du -h --max-depth=1 openwrt/bin
+        make -j$(nproc)
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
